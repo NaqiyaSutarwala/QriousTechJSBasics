@@ -1,0 +1,91 @@
+<!-- Event Capturing -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Capturing Example</title>
+  </head>
+  <body>
+    <div id="outer">
+      <button id="inner">Click me</button>
+    </div>
+
+    <script>
+      document.getElementById("outer").addEventListener(
+        "click",
+        function () {
+          console.log("Outer div clicked (capturing phase)", event.eventPhase);
+        },
+        true
+      ); // The third parameter 'true' enables event capturing
+
+      document.getElementById("inner").addEventListener("click", function () {
+        console.log("Inner button clicked (bubbling phase)", event.eventPhase);
+      });
+    </script>
+  </body>
+</html>
+
+<!-- Event Bubbling -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Bubbling Example</title>
+  </head>
+  <body>
+    <div id="outer">
+      <button id="inner">Click me</button>
+    </div>
+
+    <script>
+      document.getElementById("outer").addEventListener("click", function () {
+        console.log("Outer div clicked");
+      });
+
+      document.getElementById("inner").addEventListener("click", function () {
+        console.log("Inner button clicked");
+      });
+    </script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Write Example</title>
+  </head>
+  <body onload="load()">
+    <h1>Original Content</h1>
+
+    <script>
+      function load() {
+        setTimeout(() => {
+          document.write(Date());
+        }, 3000);
+      }
+    </script>
+  </body>
+</html> -->
+
+<!-- <!DOCTYPE html> -->
+<!-- <html>
+  <body>
+    <h1>JavaScript HTML Events</h1>
+    <h2>The onclick Attribute</h2>
+
+    <h2 onclick="changeText(this)">Click on this text!</h2>
+
+    <script>
+      function changeText(id) {
+        console.log(id);
+        id.innerHTML = "Ooops!";
+      }
+    </script>
+  </body>
+</html>  -->

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
 
 * {
   margin: 0;
@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  font-family: 'Press Start 2P', sans-serif;
+  font-family: "Press Start 2P", sans-serif;
   color: #eee;
   background-color: #222;
   /* background-color: #60b347; */
@@ -56,6 +56,54 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
+.heading {
+  font-size: 4rem;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.input {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+
+  text-align: center;
+  position: absolute;
+  font-size: 2rem;
+  top: 45%;
+  left: 38%;
+  transform: translate(-50%, -50%);
+}
+
+.inputTwo {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+
+  text-align: center;
+  position: absolute;
+  font-size: 2rem;
+  top: 45%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+}
+
 .number {
   background: #eee;
   color: #333;
@@ -67,6 +115,15 @@ h1 {
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 50%);
+}
+
+.btnSubmit {
+  padding: 15px;
+  font-size: 2rem;
+  font-family: "Press Start 2P", sans-serif;
+  position: absolute;
+  top: 60%;
+  left: 45%;
 }
 
 .between {

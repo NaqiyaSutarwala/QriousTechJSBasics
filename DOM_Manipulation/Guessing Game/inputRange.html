@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Guess My Number!</title>
+    
+  </head>
+  <body>
+    <h1 class="heading">Select your own Range</h1>
+    <form action="game.html">
+        <div class="input">
+            From: <input type="number" id="numOne" style="font-size: 2rem" />
+          </div>
+          <div class="inputTwo">
+            To: <input type="number" id="numTwo" style="font-size: 2rem" />
+          </div>
+          <button class="btnSubmit" onclick="setData()">Submit</button>
+          
+    </form>
+    <script src="rangeData.js" defer></script>
+  </body>
+</html>
