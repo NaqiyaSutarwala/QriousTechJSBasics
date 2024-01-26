@@ -4,6 +4,8 @@ let numTwo = "";
 
 let dataArray = JSON.parse(data);
 
+console.log(window.location.href);
+
 dataArray.map((item) => {
   numOne = item.min;
   numTwo = item.max;
@@ -12,7 +14,9 @@ dataArray.map((item) => {
 console.log(numOne);
 console.log(numTwo);
 
-document.querySelector(".between").textContent = `(Between ${numOne} and ${numTwo})`;
+document.querySelector(
+  ".between"
+).textContent = `(Between ${numOne} and ${numTwo})`;
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -26,9 +30,7 @@ console.log(numTwo);
 
 // document.querySelector(".number").textContent = secretNumber;
 
-
 let highScore = 0;
-
 
 document.querySelector(".check").addEventListener("click", function () {
   console.log(secretNumber);
@@ -36,14 +38,18 @@ document.querySelector(".check").addEventListener("click", function () {
 
   let score = document.querySelector(".score").textContent;
 
+  // Not a valid number or no Number
   if (!guess) {
     document.querySelector(".message").textContent = "No number";
+
+    // If the guess is correct
   } else if (guess === secretNumber) {
     document.querySelector(".number").textContent = secretNumber;
     document.querySelector(".message").textContent = "Correct Number";
     document.body.style.backgroundColor = "#60b347";
     document.querySelector(".number").style.width = "30rem";
 
+    // Setting up High Score functionality
     highScore = document.querySelector(".highscore").textContent;
     if (highScore == 0) {
       highScore = score;
@@ -52,6 +58,8 @@ document.querySelector(".check").addEventListener("click", function () {
       highScore = score;
       document.querySelector(".highscore").textContent = highScore;
     }
+
+    // If guess is incorrect
   } else if (guess !== secretNumber) {
     document.body.style.backgroundColor = "#fc3636";
     if (score > 0) {
@@ -65,6 +73,7 @@ document.querySelector(".check").addEventListener("click", function () {
   }
 });
 
+// Again Functionality
 document.querySelector(".again").addEventListener("click", function () {
   secretNumber = getRandomNumber(numOne, numTwo);
   document.querySelector(".number").textContent = "?";

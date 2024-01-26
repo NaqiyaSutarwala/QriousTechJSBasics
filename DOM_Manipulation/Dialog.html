@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dialog Example</title>
+  </head>
+  <body>
+    <!-- Trigger button -->
+    <button onclick="openDialog()">Open Dialog</button>
+
+    <!-- The dialog box -->
+    <dialog id="myDialog">
+      <h2>Dialog Title</h2>
+      <p>This is the content of the dialog.</p>
+      <button onclick="closeDialog()">Close</button>
+    </dialog>
+
+
+    <script>
+      // JavaScript functions to control the dialog
+      function openDialog() {
+        document.getElementById("myDialog").showModal();
+      }
+
+      function closeDialog() {
+        document.getElementById("myDialog").close();
+      }
+    </script>
+  </body>
+</html>
