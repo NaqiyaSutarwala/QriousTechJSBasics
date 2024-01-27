@@ -1,13 +1,13 @@
 const arrOfWords = [
   "hello",
   "eses",
-  "merry",
+  "merryeeeeeeeeeee",
   "dear",
   "deere",
   "twoee",
   "One",
   "two",
-  "three",
+  "threeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
   "Five",
 ];
 
@@ -34,15 +34,9 @@ const arrOfWords = [
 let arr = [];
 
 for (let i = 0; i < arrOfWords.length; i++) {
-  let count = 0;
   const regex = /.*e.*e.*/;
 
   if (!regex.test(arrOfWords[i])) {
-    arr.push(arrOfWords[i] + "e");
-  }
-
-
-  if (count === 1) {
     arr.push(arrOfWords[i] + "e");
   }
 }
