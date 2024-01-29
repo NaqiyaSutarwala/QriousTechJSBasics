@@ -12,54 +12,46 @@
         <h1 class="Title">To-Do List</h1>
         <div class="card">
           To-do Task:
-          <input type="text" class="input" />
+          <input type="text" id="inputTask" class="input" />
 
           Task Description:
-          <textarea cols="4" class="input" style="height: 50px"></textarea>
+          <textarea
+            cols="4"
+            class="input"
+            id="inputTaskDesc"
+            style="height: 50px"
+          ></textarea>
 
           DeadLine:
-          <input type="date" class="input" />
+          <input type="date" id="inputDate" class="input" />
 
-          <button type="button" class="input button" style="height: 40px">
+          <button
+            type="submit"
+            class="input button"
+            id="submitButton"
+            style="height: 40px"
+          >
             Submit
           </button>
         </div>
 
         <!-- Dialog -->
 
-        <dialog id="dataDialog" class="box overlay">
-          <div class="flexCenter">
-            <h3 style="text-align: center">Task Details</h3>
-            <div>
-              <p style="font-weight: bold">Task Name:</p>
-              <div style="margin-top: 10px">To complete JS</div>
+        <div id="displayDialog"  >
+          <dialog id="dataDialog" >
+            
             </div>
+          </dialog>
+          
+        </div>
 
-            <div>
-              <p style="font-weight: bold">Task Description:</p>
-              <div style="margin-top: 10px">To complete JS</div>
-            </div>
 
-            <div style="flex-direction: row; display: flex">
-              <button class="taskButtons">Mark As Done</button>
-              <button class="taskButtons">Delete</button>
-            </div>
-          </div>
-        </dialog>
 
         <!-- Display data -->
 
-        <div class="card displayCard" id="displayCard">
-          <div class="displayHead">
-            Title:
-            <h2 class="displayTitle">Complete Chap 7</h2>
-          </div>
-          <div class="displayHead">
-            16-01-2024 <br />
-            <button class="completedButton">Completed</button>
-          </div>
-        </div>
-      </div>
+        <div id="mainDiv" class="displayPopUpFlex">
+         
+      </div >
     </div>
     <script src="script.js"></script>
   </body>

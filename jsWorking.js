@@ -27,7 +27,7 @@ function calcAge(birthyear) {
     }
 
     // Value changes for the whole scope when reassigned
-    console.log(output);            //New Output
+    console.log(output); //New Output
     console.log(notBlockedScoped);
   }
 
@@ -40,3 +40,49 @@ const firstName = "Naqiya";
 calcAge(1981);
 // console.log(age);    not defined error
 // printAge()       not defined error
+
+// This Keyword
+
+console.log(this); //Will point to global window object
+
+// This keyword inside a function will be undefined
+const calcAgeThis = function (birthyear) {
+  console.log(2037 - birthyear);
+  console.log(this); //undefined   //When not is strict mode this keyword inside function will return window object
+};
+
+// Simple Object Call
+calcAgeThis(1997);
+
+// This keyword in arrow functions
+
+// Arrow functions does not have
+// its own this keyword and hence points to its parents scope
+const calcAgeThisArrow = (birthyear) => {
+  console.log(2023 - birthyear);
+  console.log(this); //will return window object coz its parent is global window.
+};
+
+calcAgeThisArrow(2002);
+
+// This keyword in objects
+const jonas = {
+  year: 2002,
+  calcAge: function () {
+    console.log(this); //Will return the jonas object
+    console.log(this.year); //i.e jonas.year
+  },
+};
+
+const jonasObj = {
+  firstName: "Naqiya",
+  year: 2002,
+  calcAge: function () {
+    console.log(this);  
+    console.log(2002 - this.year);
+  },
+  greet: () => console.log(`hey ${this.firstName}`), //here this will be pointed to global window object
+};
+
+jonasObj.greet();
+ 
