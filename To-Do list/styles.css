@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   padding: 25px;
-  box-shadow: 13px 16px 85px 21px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 5px 5px 3px rgba(0, 0, 0, 0.75);
   font-size: 2rgb (15, 15, 15);
 }
 
@@ -38,7 +38,7 @@
 
 /* For Displaying data */
 .displayCard {
-  margin-top: 50px;
+  margin-top: 30px;
   width: 550px;
   display: flex;
   flex-direction: row;
@@ -68,10 +68,18 @@
 
 /* Visibility */
 .hidden {
+  display: none;
+}
+
+.hiddenBtn {
   visibility: hidden;
 }
 
 .visible {
+  visibility: collapse;
+}
+
+.visibleBtn {
   visibility: visible;
 }
 
@@ -137,4 +145,48 @@
 
 .completedStyling {
   background-color: rgb(173, 216, 253);
+}
+
+.error {
+  color: rgb(255, 117, 117);
+}
+
+.imgSort {
+  height: 40px;
+  width: 40px;
+  background: transparent;
+
+}
+
+.SearchDiv {
+  height: auto;
+  width: 550px;
+  padding: 0px 10px;
+  margin-top: 20px;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+}
+
+.searchImg {
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  background: transparent;
+  margin-right: 5px;
+  filter: invert();
+}
+
+.searchInput{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.searchInputField{
+  border: 1px solid;
+  width: 300px;
+  border-radius: 10px;
+  height: 25px;
 }

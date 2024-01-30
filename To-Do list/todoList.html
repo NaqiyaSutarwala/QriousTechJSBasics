@@ -13,6 +13,7 @@
         <div class="card">
           To-do Task:
           <input type="text" id="inputTask" class="input" />
+          <span id="titleError" class="hidden"></span>
 
           Task Description:
           <textarea
@@ -21,9 +22,11 @@
             id="inputTaskDesc"
             style="height: 50px"
           ></textarea>
+          <span id="descError" class="hidden"></span>
 
           DeadLine:
           <input type="date" id="inputDate" class="input" />
+          <span id="dateError" class="hidden"></span>
 
           <button
             type="submit"
@@ -35,24 +38,44 @@
           </button>
         </div>
 
-        <!-- Dialog -->
-
-        <div id="displayDialog"  >
-          <dialog id="dataDialog" >
-            
-            </div>
-          </dialog>
-          
+        <div class="SearchDiv">
+          <div class="searchInput">
+            <img src="./assets/images/search.png" class="searchImg" />
+            <input
+              type="text"
+              id="searchInput"
+              class="searchInputField"
+              oninput="searchInput()"
+            />
+          </div>
+          <img
+            src="./assets/images/ascending.png"
+            class="imgSort"
+            id="imgSortAscending"
+          />
+          <img
+            src="./assets/images/descending.png"
+            class="imgSort hidden"
+            id="imgSortDescending"
+          />
+          <img
+            src="./assets/images/removeSort.png"
+            class="imgSort hidden"
+            id="imgSortClear"
+          />
         </div>
 
+        <!-- Dialog -->
 
-
+        <div id="displayDialog">
+          <dialog id="dataDialog"></dialog>
+        </div>
         <!-- Display data -->
 
-        <div id="mainDiv" class="displayPopUpFlex">
-         
-      </div >
+        <div id="mainDiv" class="displayPopUpFlex"></div>
+        <div class="hidden" id="noData"><h2>No data Found</h2></div>
+      </div>
+      <script src="script.js"></script>
     </div>
-    <script src="script.js"></script>
   </body>
 </html>
