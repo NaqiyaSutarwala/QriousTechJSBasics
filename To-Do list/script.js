@@ -22,6 +22,46 @@ const taskArray = [];
 // Timestamp for id
 const id = new Date().getTime();
 
+// const completedOnClick = function (item, index) {
+//   console.log();
+//   if (item.status === "Pending") {
+//     completedButton[index].classList.add("hiddenBtn");
+//   } else {
+//     completedButton[index].classList.add("visibleBtn");
+//   }
+// };
+
+const displayInnerHtml = function (arrayDisplay) {
+  arrayDisplay.forEach((item, index) => {
+    document.getElementById(
+      "mainDiv"
+    ).innerHTML += `<div class="card displayCard" id="displayCard" onclick ="openDialog(${
+      item.id
+    })">
+        <div class="displayHead">
+            Title:
+            <h2 class="displayTitle" id="displayTitle"> ${item.title}</h2> <br>
+            <p class="displayTitle" id="displayTitle">Description: ${
+              item.desc
+            }</p>
+        </div>
+        <div class="displayHead">
+            ${item.date} <br />
+  
+            <button class="completedButton ${
+              item.status === "Pending" ? "hiddenBtn" : "visibleBtn"
+            }" id="completedButton">Completed</button>
+         </div>
+       </div>
+      </div>`;
+  });
+};
+
+const storedData = localStorage.getItem("Tasks");
+const storedDataArr = JSON.parse(storedData);
+
+displayInnerHtml(storedDataArr);
+
 // On Submit
 btnSubmit.addEventListener("click", function () {
   if (
@@ -79,39 +119,18 @@ btnSubmit.addEventListener("click", function () {
 });
 
 // Display Data
-const storedData = localStorage.getItem("Tasks");
-const storedDataArr = JSON.parse(storedData);
-storedDataArr.forEach((item) => {
-  document.getElementById(
-    "mainDiv"
-  ).innerHTML += `<div class="card displayCard" id="displayCard" onclick ="openDialog(${
-    item.id
-  })">
-      <div class="displayHead">
-          Title:
-          <h2 class="displayTitle" id="displayTitle">${item.title}</h2>
-      </div>
-      <div class="displayHead">
-          ${item.date} <br />
-
-          <button class="completedButton ${
-            item.status === "Pending" ? "hiddenBtn" : "visibleBtn"
-          }" id="completedButton">Completed</button>
-       </div>
-     </div>
-    </div>`;
-});
 
 const displayCard = document.getElementById("displayCard");
 
 const completedButton = document.querySelectorAll("#completedButton");
 
-const markCompleted = function (id, status) {
+// Mark as Done
+const markCompleted = function (id) {
   storedDataArr.forEach((item, index) => {
     if (item.id === id) {
       completedButton.forEach((list, indexList) => {
         if (indexList === index) {
-          list.classList.remove("hidden");
+          list.classList.remove("hiddenBtn");
           dataDialog.close();
           storedDataArr[index].status = "Completed";
         }
@@ -129,7 +148,6 @@ const lblInput = document.querySelectorAll(".labelTry");
 // Open Dialog
 const openDialog = function (id) {
   dataDialog.showModal();
-
   storedDataArr.forEach((item) => {
     if (item.id === id) {
       dataDialog.innerHTML = `<div class="flexCenter box overlay">
@@ -172,37 +190,34 @@ function closeDialog() {
   location.reload();
 }
 
+// To edit the data
+const startEditing = function (edit, id) {
+  storedDataArr.forEach((item) => {
+    if (item.id === id) {
+      edit.forEach((list) => {
+        list.removeAttribute("disabled");
+        list.focus();
+      });
+    }
+  });
+};
+
 // Edit Title
 function editTitle(id) {
   const edtTitleImg = document.getElementById("edtTitleImg");
   const edtDoneImg = document.getElementById("edtDoneImg");
 
-  const descInput = document.querySelectorAll("#descInput");
   const textTitle = document.querySelectorAll("#textTitle");
 
   edtDoneImg.classList.toggle("hidden");
   edtTitleImg.classList.toggle("hidden");
 
-  storedDataArr.forEach((item, index) => {
-    if (item.id === id) {
-      console.log(item);
-      textTitle.forEach((list, indexList) => {
-        console.log(list);
-        if (indexList === index) {
-          console.log(list);
-          list.removeAttribute("disabled");
-          list.focus();
-        }
-      });
-    }
-  });
+  startEditing(textTitle, id);
 }
 
 function editDone(id) {
   const edtTitleImg = document.getElementById("edtTitleImg");
   const edtDoneImg = document.getElementById("edtDoneImg");
-
-  const descInput = document.querySelectorAll("#descInput");
   const textTitle = document.querySelectorAll("#textTitle");
 
   edtDoneImg.classList.toggle("hidden");
@@ -210,13 +225,9 @@ function editDone(id) {
 
   storedDataArr.forEach((item, index) => {
     if (item.id === id) {
-      textTitle.forEach((list, indexList) => {
-        if (indexList === index) {
-          list.setAttribute("disabled", "true");
-          console.log(edtTitleImg.src);
-
-          storedDataArr[index].title = list.value;
-        }
+      textTitle.forEach((list) => {
+        list.setAttribute("disabled", "true");
+        storedDataArr[index].title = list.value;
       });
     }
   });
@@ -231,24 +242,11 @@ function editDescTitle(id) {
   const edtDescDoneImg = document.getElementById("edtDescDoneImg");
 
   const descInput = document.querySelectorAll("#descInput");
-  const textTitle = document.querySelectorAll("#textTitle");
 
   edtDescDoneImg.classList.toggle("hidden");
   edtDescImg.classList.toggle("hidden");
 
-  storedDataArr.forEach((item, index) => {
-    if (item.id === id) {
-      console.log(item);
-      descInput.forEach((list, indexList) => {
-        console.log(list);
-        if (indexList === index) {
-          console.log(list);
-          list.removeAttribute("disabled");
-          list.focus();
-        }
-      });
-    }
-  });
+  startEditing(descInput, id);
 }
 
 function editDescDone(id) {
@@ -256,22 +254,19 @@ function editDescDone(id) {
   const edtDescDoneImg = document.getElementById("edtDescDoneImg");
 
   const descInput = document.querySelectorAll("#descInput");
-  const textTitle = document.querySelectorAll("#textTitle");
 
   edtDescDoneImg.classList.toggle("hidden");
   edtDescImg.classList.toggle("hidden");
 
   storedDataArr.forEach((item, index) => {
     if (item.id === id) {
-      descInput.forEach((list, indexList) => {
-        if (indexList === index) {
-          list.setAttribute("disabled", "true");
-
-          storedDataArr[index].desc = list.value;
-        }
+      descInput.forEach((list) => {
+        list.setAttribute("disabled", "true");
+        storedDataArr[index].desc = list.value;
       });
     }
   });
+
   let storedString = JSON.stringify(storedDataArr);
 
   localStorage.setItem("Tasks", storedString);
@@ -302,7 +297,7 @@ imgSortAscending.addEventListener("click", function () {
   imgSortAscending.classList.toggle("hidden");
   imgSortDescending.classList.toggle("hidden");
 
-  let AscendingsortedArr = storedDataArr.sort((a, b) => {
+  let AscendingSortedArr = storedDataArr.sort((a, b) => {
     const titleA = a.title.toUpperCase();
     const titleB = b.title.toUpperCase();
     if (titleA < titleB) {
@@ -314,30 +309,9 @@ imgSortAscending.addEventListener("click", function () {
     return 0;
   });
 
-  console.log(AscendingsortedArr);
-
   document.getElementById("mainDiv").innerHTML = "";
 
-  AscendingsortedArr.forEach((item) => {
-    document.getElementById(
-      "mainDiv"
-    ).innerHTML += `<div class="card displayCard" id="displayCard" onclick ="openDialog(${
-      item.id
-    })">
-        <div class="displayHead">
-            Title:
-            <h2 class="displayTitle" id="displayTitle">${item.title}</h2>
-        </div>
-        <div class="displayHead">
-            ${item.date} <br />
-  
-            <button class="completedButton ${
-              item.status === "Pending" ? "hiddenBtn" : "visibleBtn"
-            }" id="completedButton">Completed</button>
-         </div>
-       </div>
-      </div>`;
-  });
+  displayInnerHtml(AscendingSortedArr);
 });
 
 //Sorting Descending
@@ -358,62 +332,22 @@ imgSortDescending.addEventListener("click", function () {
     return 0;
   });
 
-  console.log(DescendingSortedArr);
-
   document.getElementById("mainDiv").innerHTML = "";
 
-  DescendingSortedArr.forEach((item) => {
-    document.getElementById(
-      "mainDiv"
-    ).innerHTML += `<div class="card displayCard" id="displayCard" onclick ="openDialog(${
-      item.id
-    })">
-        <div class="displayHead">
-            Title:
-            <h2 class="displayTitle" id="displayTitle">${item.title}</h2>
-        </div>
-        <div class="displayHead">
-            ${item.date} <br />
-  
-            <button class="completedButton ${
-              item.status === "Pending" ? "hiddenBtn" : "visibleBtn"
-            }" id="completedButton">Completed</button>
-         </div>
-       </div>
-      </div>`;
-  });
+  displayInnerHtml(DescendingSortedArr);
 });
 
 // Clear Sorting
 imgSortClear.addEventListener("click", function () {
   imgSortClear.classList.toggle("hidden");
-  imgSortAscending.classList.toggle("hidden")
+  imgSortAscending.classList.toggle("hidden");
 
   document.getElementById("mainDiv").innerHTML = "";
 
   let clearSort = localStorage.getItem("Tasks");
   const clearSortArr = JSON.parse(clearSort);
 
-  clearSortArr.forEach((item) => {
-    document.getElementById(
-      "mainDiv"
-    ).innerHTML += `<div class="card displayCard" id="displayCard" onclick ="openDialog(${
-      item.id
-    })">
-        <div class="displayHead">
-            Title:
-            <h2 class="displayTitle" id="displayTitle">${item.title}</h2>
-        </div>
-        <div class="displayHead">
-            ${item.date} <br />
-  
-            <button class="completedButton ${
-              item.status === "Pending" ? "hiddenBtn" : "visibleBtn"
-            }" id="completedButton">Completed</button>
-         </div>
-       </div>
-      </div>`;
-  });
+  displayInnerHtml(clearSortArr);
 });
 
 // Searching
@@ -421,39 +355,23 @@ function searchInput() {
   const searchInput = document.getElementById("searchInput").value;
 
   const searchedArray = storedDataArr.filter((item) => {
-    return item.title.includes(searchInput);
-  });
+    const ValueArr = Object.values(item);
 
-  console.log(searchedArray);
+    const searchedData = ValueArr.some(function (search) {
+      const searchString = String(search);
+      return searchString.includes(searchInput);
+    });
+    if (searchedData) return item;
+  });
 
   if (searchedArray.length === 0) {
     console.log("Inhere");
     document.getElementById("mainDiv").innerHTML = "";
-    const noData = document.getElementById('noData')
-    noData.classList.remove('hidden')
+    const noData = document.getElementById("noData");
+    noData.classList.remove("hidden");
   } else {
     document.getElementById("mainDiv").innerHTML = "";
-
-    searchedArray.forEach((item) => {
-      document.getElementById(
-        "mainDiv"
-      ).innerHTML += `<div class="card displayCard" id="displayCard" onclick ="openDialog(${
-        item.id
-      })">
-            <div class="displayHead">
-                Title:
-                <h2 class="displayTitle" id="displayTitle">${item.title}</h2>
-            </div>
-            <div class="displayHead">
-                ${item.date} <br />
-      
-                <button class="completedButton ${
-                  item.status === "Pending" ? "hiddenBtn" : "visibleBtn"
-                }" id="completedButton">Completed</button>
-             </div>
-           </div>
-          </div>`;
-    });
+    displayInnerHtml(searchedArray);
   }
 
   if (searchInput === "") {

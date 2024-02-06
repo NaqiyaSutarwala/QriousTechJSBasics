@@ -78,11 +78,42 @@ const jonasObj = {
   firstName: "Naqiya",
   year: 2002,
   calcAge: function () {
-    console.log(this);  
+    console.log(this);
     console.log(2002 - this.year);
   },
   greet: () => console.log(`hey ${this.firstName}`), //here this will be pointed to global window object
 };
 
 jonasObj.greet();
- 
+
+const addTax = function (rate) {
+  return function (value) {
+    return value + (value * rate) / 100;
+  };
+};
+
+const takeValue = addTax(20);
+console.log(takeValue(100));
+
+// console.log(addTax(20)(100));
+
+const poll = {
+  question: "What is your favourite programming language?",
+  options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
+  // This generates [0, 0, 0, 0]. More in the next section 😃
+  answers: new Array(4).fill(0),
+};
+
+// Closures
+let counter = 0;
+
+function add() {
+  let counter = 0;
+  counter += 1;
+  console.log(counter);
+}
+
+// Call add() 3 times
+add();
+add();
+console.log(add());
