@@ -12,6 +12,7 @@ const labelSumIn = document.querySelector(".summary__value--in");
 const labelSumOut = document.querySelector(".summary__value--out");
 const labelSumInterest = document.querySelector(".summary__value--interest");
 const labelTimer = document.querySelector(".timer");
+const labelMovementsDate = document.querySelector(".movements__date");
 
 const containerApp = document.querySelector(".app");
 const containerMovements = document.querySelector(".movements");
@@ -33,18 +34,22 @@ const inputClosePin = document.querySelector(".form__input--pin");
 // Data
 const account1 = {
   owner: "Jonas Schmedtmann",
-  movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
+  movements: [
+    200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300, 5200, 1111,
+  ],
   interestRate: 1.2, // %
   pin: 1111,
   movementsDates: [
-    "2019-11-18T21:31:17.178Z",
-    "2019-12-23T07:42:02.383Z",
-    "2020-01-28T09:15:04.904Z",
-    "2020-04-01T10:17:24.185Z",
-    "2020-05-08T14:11:59.604Z",
-    "2020-05-27T17:01:17.194Z",
-    "2020-07-11T23:36:17.929Z",
-    "2020-07-12T10:51:36.790Z",
+    "2023-01-28T09:15:04.904Z",
+    "2023-04-01T10:17:24.185Z",
+    "2023-05-08T14:11:59.604Z",
+    "2023-05-27T17:01:17.194Z",
+    "2023-07-11T23:36:17.929Z",
+    "2023-07-12T10:51:36.790Z",
+    "2024-02-01T07:42:02.383Z",
+    "2024-02-05T21:31:17.178Z",
+    "2024-02-06T21:31:17.178Z",
+    "2024-02-07T21:31:17.178Z",
   ],
   currency: "EUR",
   locale: "pt-PT", // de-DE
@@ -76,14 +81,14 @@ const account3 = {
   interestRate: 0.7,
   pin: 3333,
   movementsDates: [
-    "2019-11-18T21:31:17.178Z",
-    "2019-12-23T07:42:02.383Z",
-    "2020-01-28T09:15:04.904Z",
-    "2020-04-01T10:17:24.185Z",
-    "2020-05-08T14:11:59.604Z",
-    "2020-05-27T17:01:17.194Z",
-    "2020-07-11T23:36:17.929Z",
-    "2020-07-12T10:51:36.790Z",
+    "2023-11-18T21:31:17.178Z",
+    "2023-12-23T07:42:02.383Z",
+    "2023-01-28T09:15:04.904Z",
+    "2023-04-01T10:17:24.185Z",
+    "2023-05-08T14:11:59.604Z",
+    "2023-05-27T17:01:17.194Z",
+    "2023-07-11T23:36:17.929Z",
+    "2023-07-12T10:51:36.790Z",
   ],
   currency: "EUR",
   locale: "pt-PT", // de-DE
@@ -109,8 +114,8 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
-
-console.log(accounts);
+let accountCurrent;
+let timer;
 
 const currentDate = function (account) {
   const now = new Date();
@@ -135,17 +140,44 @@ const creatingUserName = () => {
 // Add username key to the object
 creatingUserName();
 
+const displayDates = function (itemDate, account) {
+  const now = new Date();
+  const nowTimeStamp = now.getTime();
+
+  const itemDateDisp = new Date(itemDate);
+  const dateTimeStamp = itemDateDisp.getTime();
+
+  const days = Math.floor(
+    Math.abs((nowTimeStamp - dateTimeStamp) / (24 * 60 * 60 * 1000))
+  );
+
+  if (days === 0) {
+    return "Today";
+  } else if (days === 1) {
+    return "Yesterday";
+  } else if (days <= 7) {
+    return `${days} days ago`;
+  } else {
+    return Intl.DateTimeFormat(account.locale).format(itemDateDisp);
+  }
+};
+
 const displayTransactions = (account) => {
   containerMovements.innerHTML = "";
-
   account.movements.forEach((item, index) => {
+    const date = new Date(account.movementsDates[index]);
+    const formattedDate = Intl.DateTimeFormat(account.locale).format(date);
+
     const row = `<div class="movements__row">
             <div class="movements__type movements__type--${
               item < 0 ? "withdrawal" : "deposit"
             }">
               ${index + 1} ${item < 0 ? "withdrawal" : "deposit"}
             </div>
-            <div class="movements__date">24/01/2037</div>
+            <div class="movements__date">${displayDates(
+              account.movementsDates[index],
+              account
+            )}</div>
             <div class="movements__value">${item.toFixed(2)} €</div>
       </div>`;
 
@@ -173,7 +205,6 @@ const currentBalance = function (account) {
 
 // Calculating Interest
 const interestRate = function (account) {
-  console.log(account);
   const deposit = account.movements.filter((item) => {
     return item > 0;
   });
@@ -188,8 +219,6 @@ const interestRate = function (account) {
 
   labelSumInterest.textContent = interest.toFixed(2);
 };
-
-let accountCurrent;
 
 const loginFunctionality = function () {
   const accountT = accounts
@@ -215,11 +244,13 @@ const loginFunctionality = function () {
     .filter((item) => {
       return item !== undefined;
     });
-  console.log(accountT);
+
+  if (timer) {
+    clearInterval(timer);
+  }
+   timer = logOutTimer();
 
   accountCurrent = accountT;
-
-  return accountT;
 };
 
 // Validations
@@ -243,6 +274,8 @@ btnTransfer.addEventListener("click", function () {
       if (item[data] === accountName) {
         item.movements.push(Number(inputTransferAmount.value));
         accountCurrent[0].movements.push(Number(-inputTransferAmount.value));
+        accountCurrent[0].movementsDates.push(new Date());
+        item.movementsDates.push(new Date());
         displayTransactions(accountCurrent[0]);
         calculateTotals(accountCurrent[0]);
         currentBalance(accountCurrent[0]);
@@ -261,10 +294,8 @@ btnLoan.addEventListener("click", function (e) {
     amount > 0 &&
     accountCurrent[0].movements.some((mov) => mov >= amount * 0.1)
   ) {
-    // Add movement
     accountCurrent[0].movements.push(amount);
-
-    // Update UI
+    accountCurrent[0].movementsDates.push(new Date());
     displayTransactions(accountCurrent[0]);
     calculateTotals(accountCurrent[0]);
     currentBalance(accountCurrent[0]);
@@ -286,16 +317,43 @@ btnClose.addEventListener("click", function () {
   });
 });
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
+// console.log("heelo befor");
+// setInterval(() => {
+//   console.log("heree from timeout");
+// }, 1000);
 
-const currencies = new Map([
-  ["USD", "United States dollar"],
-  ["EUR", "Euro"],
-  ["GBP", "Pound sterling"],
-]);
+const logOutTimer = function () {
+  let i = 120;
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+  const timer = setInterval(() => {
+    const min = i / 60;
+    const seconds = i % 60;
+
+    labelTimer.textContent = `${String(Math.trunc(min)).padStart(
+      2,
+      0
+    )} : ${String(Math.trunc(seconds)).padStart(2, 0)}`;
+    i--;
+
+    if (i === 0) {
+      clearInterval(timer);
+      containerApp.style.opacity = 0;
+      labelWelcome.textContent = "Log in to get started";
+    }
+  }, 1000);
+  return timer;
+};
+
+/////////////////////////////////////////////////
+// ///////////////////////////////////////////////
+// //LECTURES
+
+// const currencies = new Map([
+//   ["USD", "United States dollar"],
+//   ["EUR", "Euro"],
+//   ["GBP", "Pound sterling"],
+// ]);
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////

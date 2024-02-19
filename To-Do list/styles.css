@@ -155,7 +155,6 @@
   height: 40px;
   width: 40px;
   background: transparent;
-
 }
 
 .SearchDiv {
@@ -177,14 +176,13 @@
   filter: invert();
 }
 
-.searchInput{
+.searchInput {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
-.searchInputField{
+.searchInputField {
   border: 1px solid;
   width: 300px;
   border-radius: 10px;

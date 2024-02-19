@@ -35,9 +35,9 @@ const displayInnerHtml = function (arrayDisplay) {
   arrayDisplay.forEach((item, index) => {
     document.getElementById(
       "mainDiv"
-    ).innerHTML += `<div class="card displayCard" id="displayCard" onclick ="openDialog(${
-      item.id
-    })">
+    ).innerHTML += ` <div class="card displayCard" draggable='true' class="displayCard" id='div--${
+      index + 1
+    }'  onclick ="openDialog(${item.id})">
         <div class="displayHead">
             Title:
             <h2 class="displayTitle" id="displayTitle"> ${item.title}</h2> <br>
@@ -53,14 +53,82 @@ const displayInnerHtml = function (arrayDisplay) {
             }" id="completedButton">Completed</button>
          </div>
        </div>
-      </div>`;
+      </div> `;
   });
 };
 
 const storedData = localStorage.getItem("Tasks");
 const storedDataArr = JSON.parse(storedData);
-
 displayInnerHtml(storedDataArr);
+
+const taskRow = document.querySelectorAll(".displayCard");
+const mainDiv = document.getElementById("mainDiv");
+let currentId;
+taskRow.forEach((item) => {
+  item.addEventListener("dragstart", function (e) {
+    e.dataTransfer.setData("text/html", e.target.id);
+    taskRow.forEach((item) => {
+      item.style.marginTop = "10px";
+    });
+  });
+});
+
+mainDiv.addEventListener("dragover", function (e) {
+  e.preventDefault();
+  let normalId = e.target.id;
+  if (normalId.includes("div--")) {
+    currentId = normalId;
+  }
+});
+
+//   e.preventDefault();
+
+//   item.addEventListener("drop", function (e) {
+//     e.preventDefault();
+//     const taskRowData = e.dataTransfer.getData("text/html");
+
+//     console.log(currentId);
+
+//     document
+//       .getElementById(currentId)
+//       .insertAdjacentElement(
+//         "beforebegin",
+//         document.getElementById(taskRowData)
+//       );
+//     // document.getElementById(currentId).insertBefore(taskRowData);
+
+//     // console.log(document.getElementById(taskRowData).closest(".displayCard"));
+//     // taskRow.forEach((item, index) => {
+//     //   // console.log(`div--${indexDrop + 1}`);
+//     // });
+//     // console.log(taskRowData);
+//   });
+// });
+
+mainDiv.addEventListener("drop", function (e) {
+  e.preventDefault();
+  const taskRowData = e.dataTransfer.getData("text/html");
+
+  document
+    .getElementById(currentId)
+    .insertAdjacentElement("beforebegin", document.getElementById(taskRowData));
+  taskRow.forEach((item) => {
+    item.style.marginTop = "30px";
+  });
+});
+
+mainDiv.addEventListener("dragleave", function () {
+  console.log("dragleave");
+  document.getElementById(currentId).style.marginTop = "60px";
+});
+
+mainDiv.addEventListener("dragenter", function (e) {
+  console.log("dragenter");
+  console.log(document.getElementById(currentId));
+  taskRow.forEach((item) => {
+    item.style.marginTop = "10px";
+  });
+});
 
 // On Submit
 btnSubmit.addEventListener("click", function () {
@@ -84,7 +152,6 @@ btnSubmit.addEventListener("click", function () {
     if (!localStorage.getItem("Tasks")) {
       const taskString = JSON.stringify(taskArray);
       localStorage.setItem("Tasks", taskString);
-
       location.reload();
     } else {
       const taskGet = localStorage.getItem("Tasks");

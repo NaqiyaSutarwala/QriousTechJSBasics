@@ -1,0 +1,101 @@
+<body>
+  <div id="mainDiv"></div>
+</body>
+
+<script>
+  
+    let count = 0;
+    let arrayMain = [];
+    const displayName = function (arrayInput, depth = 0) {
+      arrayInput.forEach((obj) => {
+        if (obj.hasOwnProperty("name")) {
+          const newElement = document.createElement("h1");
+          newElement.textContent = obj["name"];
+          document.getElementById("mainDiv").appendChild(newElement);
+          if (depth === 0) {
+            newElement.style.marginLeft = "0px";
+          } else {
+            newElement.style.marginLeft = `${50 * depth}px`;
+          }
+          if (obj.hasOwnProperty("children")) {
+            displayName(obj["children"], depth + 1);
+          }
+        }
+      });
+    };
+
+    // const newElement = document.createElement("h1");
+    // newElement.textContent = obj["name"];
+    // document.getElementById("mainDiv").appendChild(newElement);
+
+    // console.log(obj["name"]);
+    // arrayMain.push(obj["name"]);
+
+    displayName([
+      {
+        id: 1,
+        name: "milan",
+        children: [
+          {
+            id: 3,
+            name: "sachin",
+            children: [
+              {
+                id: 5,
+                name: "dixit",
+              },
+              {
+                id: 11,
+                name: "rushil",
+                children: [
+                  {
+                    id: 13,
+                    name: "yash",
+                    children: [
+                      {
+                        name: "Naqiya",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "virat",
+        children: [
+          {
+            id: 4,
+            name: "yuvraj",
+            children: [
+              {
+                id: 6,
+                name: "ishan",
+                children: [
+                  {
+                    id: 8,
+                    name: "hello",
+                  },
+                ],
+              },
+              {
+                id: 12,
+                name: "rahul",
+                children: [
+                  {
+                    id: 14,
+                    name: "kishan",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+
+    console.log(arrayMain);
+</script>

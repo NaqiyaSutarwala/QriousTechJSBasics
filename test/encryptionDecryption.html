@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Encryption</h1>
+    Message:
+    <input type="text" id="Message" />
+    key:
+    <input type="text" id="key" />
+    <button type="submit" id="Encrypt">Encrypt Data</button>
+
+    <h1>Decryption</h1>
+    <input type="text" id="decryptKey" />
+    <button type="submit" id="DecryptButton">Decrypt Data</button>
+    <h3 id="displayData"></h3>
+  </body>
+
+  <script>
+    const message = document.getElementById("Message");
+    const key = document.getElementById("key");
+    const encryptButton = document.getElementById("Encrypt");
+    const DecryptButton = document.getElementById("DecryptButton");
+    const displayData = document.getElementById("displayData");
+
+    let arrayData = [];
+    let arrayAll = [];
+
+    encryptButton.addEventListener("click", (e) => {
+      let arrayEnc = [];
+      const str = message.value;
+      const strKey = key.value;
+
+      const codeMessage = str.split("").map((element, index) => {
+        const code = str.charCodeAt(index);
+        return code;
+      });
+
+      arrayEnc.push(codeMessage);
+
+      const codeKey = strKey.split("").map((element, index) => {
+        const code = strKey.charCodeAt(index);
+        return code;
+      });
+
+      arrayEnc.push(codeKey);
+      let arrayFinal = arrayEnc.flat().join("");
+      arrayAll.push(arrayFinal);
+    });
+
+    DecryptButton.addEventListener("click", function () {
+      console.log(arrayAll);
+
+      let word = [];
+
+      const DecryptedData = arrayAll.map((item) => {
+        console.log(110);
+        console.log(String.fromCharCode(110));
+        word = item.split("").map((letter) => {
+          console.log(letter);
+          String.fromCharCode(letter);
+        });
+        console.log(word);
+      });
+
+      const dataDecrypted = arrayData
+        .map((item) => {
+          const bytes = CryptoJS.AES.decrypt(item, decryptKey.value);
+          const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+          return decryptedData;
+        })
+        .filter((item) => {
+          return item !== undefined;
+        });
+
+      displayData.textContent = dataDecrypted;
+    });
+  </script>
+</html>

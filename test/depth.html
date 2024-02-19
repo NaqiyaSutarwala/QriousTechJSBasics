@@ -1,0 +1,24 @@
+<body>
+  <div id="mainDiv"></div>
+</body>
+
+<script>
+  let count = 0;
+  let arrayMain = [];
+  const displayName = function (arrayInput, depth = 0) {
+    arrayInput.forEach((obj) => {
+      if (obj.hasOwnProperty("name")) {
+        const newElement = document.createElement("h1");
+        newElement.textContent = obj["name"];
+        document.getElementById("mainDiv").appendChild(newElement);
+        if (depth === 0) {
+          newElement.style.marginLeft = "0px";
+        } else {
+          newElement.style.marginLeft = `${50 * depth}px`;
+        }
+        if (obj.hasOwnProperty("children")) {
+          displayName(obj["children"], depth + 1);
+        }
+      }
+    });
+  };
