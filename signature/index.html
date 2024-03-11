@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./style.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script defer src="./script.js"></script>
+    <title>Signature</title>
+  </head>
+  <body>
+    <div class="div-main">
+      <div class="div-functionalities">
+        <div class="div-selections">
+          Title: <input class="borderRadius input-title" type="text" />
+        </div>
+        <div class="div-selections">
+          Text Color Picker
+          <input
+            class="borderRadius text-color-picker"
+            type="color"
+            value="#000000"
+          />
+        </div>
+        <div class="div-selections">
+          Background
+          <input class="borderRadius background-color-picker" type="color" />
+        </div>
+        <div class="div-selections">
+          Font Size
+          <select class="borderRadius options-container" value="50px">
+            <!-- <option class="font-size-option">6px</option>
+            <option class="font-size-option">7px</option>
+            <option class="font-size-option">8px</option>
+            <option class="font-size-option">9px</option>
+            <option class="font-size-option">10px</option>-->
+          </select>
+        </div>
+      </div>
+
+      <div class="input-data-div">
+        <textarea class="borderRadius input-user-data"> </textarea>
+      </div>
+
+      <div class="buttons-div">
+        <button type="button" class="borderRadius btn-clear">Clear</button>
+        <button type="button" class="borderRadius btn-save">
+          Save and Download
+        </button>
+        <button type="button" class="borderRadius btn-update hidden">
+          Update
+        </button>
+        <button type="button" class="borderRadius btn-retrieve">
+          Retrieve Saved
+        </button>
+      </div>
+
+      <div>
+        <dialog class="modal-get-title modal-styling borderRadius">
+          <div class="modal-data">
+            <img
+              src="./assets/images/closeModal.png"
+              alt="Close Modal"
+              class="img-close-modal"
+            />
+            <h1>Please enter Title of your Signature</h1>
+            <input type="text" class="input-search-title borderRadius" />
+            <button type="button" class="btn-search borderRadius">
+              Search
+            </button>
+          </div>
+        </dialog>
+      </div>
+    </div>
+  </body>
+</html>

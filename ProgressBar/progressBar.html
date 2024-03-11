@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="script.js"></script>
+    <link href="./progressBarStyle.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main-div">
+      <div class="progressBar-container-div">
+        <select class="progressSelection" id="status-options">
+          <option data-status="0">Status One</option>
+          <option data-status="1">Status Two</option>
+          <option data-status="2">Status Three</option>
+          <option data-status="3">Status Four</option>
+          <option data-status="4">Status Five</option>
+          <option data-status="5">Status six</option>
+        </select>
+
+        <div class="progressBar-updation-div">
+          <div class="progressBar-arrows" id="progressBar-arrows-div">
+            <div class="progress-arrow">
+              <div class="pointed-arrow"></div>
+            </div>
+            <div class="progress-arrow">
+              <div class="pointed-last-arrow"></div>
+              <div class="pointed-arrow"></div>
+            </div>
+            <div class="progress-arrow">
+              <div class="pointed-last-arrow"></div>
+              <div class="pointed-arrow"></div>
+            </div>
+            <div class="progress-arrow">
+              <div class="pointed-last-arrow"></div>
+              <div class="pointed-arrow"></div>
+            </div>
+            <div class="progress-arrow arrow-border-radius">
+              <div class="pointed-last-arrow"></div>
+              <div class="pointed-arrow"></div>
+            </div>
+          </div>
+          <!-- <div class="progressBar-shadow-div"></div> -->
+        </div>
+        <div class="progressBar-labels-div" id="progressBar-labels-div">
+          <div class="labelStatus">Status 1</div>
+          <div class="labelStatus notFirstLabel">Status 2</div>
+          <div class="labelStatus notFirstLabel">Status 3</div>
+          <div class="labelStatus notFirstLabel">Status 4</div>
+          <div class="labelStatus notFirstLabel">Status 5</div>
+          <div class="labelStatus notFirstLabel">Status 6</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

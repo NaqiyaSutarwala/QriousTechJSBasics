@@ -1,0 +1,135 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.main-div {
+  margin: auto;
+  max-width: 1920px;
+}
+
+.progressBar-container-div {
+  height: auto;
+  width: 100%;
+  background-color: #000000;
+  padding: 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.progressBar-arrows {
+  position: relative;
+  display: flex;
+}
+
+.progress-arrow {
+  height: 10px;
+  background-color: #333333;
+  margin-top: 20px;
+  border-radius: 10px 0px 0px 10px;
+  position: relative;
+  z-index: 5;
+  width: 195px;
+  margin-right: 8px;
+}
+
+.gradient-div-after {
+  &::after {
+    content: "";
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    top: 0;
+    right: 0;
+    z-index: -2;
+    background: linear-gradient(270deg, #ff48f1 0%, rgba(255, 72, 241, 0) 100%);
+  }
+}
+
+.gradient-div-before {
+  &::before {
+    content: "";
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: linear-gradient(270deg, #ff48f1 0%, rgba(255, 72, 241, 0) 100%);
+  }
+}
+
+.pointed-arrow {
+  height: 7.5px;
+  width: 7.5px;
+  float: right;
+  position: absolute;
+  right: -4px;
+  top: 1.4px;
+  transform: rotate(45deg);
+  background-color: #333333;
+}
+
+.pointed-last-arrow {
+  height: 7.5px;
+  width: 7.5px;
+  position: absolute;
+  transform: rotate(45deg);
+  background-color: #000000;
+  top: 1.5px;
+  left: -1px;
+}
+
+.arrow-border-radius {
+  border-radius: 10px;
+}
+
+.progressBar-updation-div {
+  position: relative;
+}
+
+.progressBar-shadow-div {
+  height: 24px;
+  width: 30px;
+  background-color: aliceblue;
+  position: absolute;
+  /* left: 180px; */
+  left: 0px;
+  z-index: 2;
+  background: linear-gradient(270deg, #ff48f1 0%, rgba(255, 72, 241, 0) 100%);
+}
+
+.progressBar-labels-div {
+  color: antiquewhite;
+  margin-top: 18px;
+}
+
+.labelStatus {
+  display: inline-block;
+  width: 182px;
+}
+
+.notFirstLabel {
+  margin-right: 10px;
+}
+
+.progressSelection {
+  padding: 8px;
+  width: 300px;
+  border-radius: 10px;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.activeBackground {
+  background-color: #ff48f1;
+}
+
+.defaultBackground {
+  background-color: #333333;
+}
+
+.textColor {
+  color: #ff48f1;
+}

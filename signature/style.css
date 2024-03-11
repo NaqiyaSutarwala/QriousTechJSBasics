@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.div-main {
+  margin: auto;
+  max-width: 1920px;
+  padding: 50px;
+}
+
+.div-functionalities {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.div-selections {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.div-selections > input,
+select {
+  margin-top: 10px;
+  width: auto;
+  height: 30px;
+  padding: 5px;
+}
+
+.input-data-div > textarea {
+  width: 100%;
+  height: 500px;
+  margin: 10px;
+  padding: 20px;
+  resize: none;
+  border: 1px solid black;
+  font-size: 30px;
+}
+
+.buttons-div {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.buttons-div > button {
+  width: 25%;
+  padding: 5px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.modal-styling {
+  position: relative;
+  height: fit-content;
+  width: 600px;
+  margin: auto;
+  background-color: rgb(255, 245, 245);
+  padding: 50px;
+  border: 1px black solid;
+}
+
+.modal-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.input-search-title {
+  width: 100%;
+  margin: 20px;
+  height: 30px;
+}
+
+.btn-search {
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.img-close-modal {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+/* General Styling */
+
+.borderRadius {
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}

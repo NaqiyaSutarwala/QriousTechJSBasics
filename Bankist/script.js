@@ -248,7 +248,7 @@ const loginFunctionality = function () {
   if (timer) {
     clearInterval(timer);
   }
-   timer = logOutTimer();
+  timer = logOutTimer();
 
   accountCurrent = accountT;
 };
@@ -323,7 +323,7 @@ btnClose.addEventListener("click", function () {
 // }, 1000);
 
 const logOutTimer = function () {
-  let i = 120;
+  let i = 1;
 
   const timer = setInterval(() => {
     const min = i / 60;
